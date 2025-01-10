@@ -14,4 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    const resetButton = document.getElementById('reset-button');
+    resetButton.addEventListener('click', () => {
+        cells.forEach(cell => {
+            cell.textContent = ''; 
+        });
+        currentPlayer = 'X'; 
+        console.log('Game reset!');
+    });
 });
