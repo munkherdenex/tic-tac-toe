@@ -1,61 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const cells = document.querySelectorAll('td'); 
+    const cells = document.querySelectorAll('td');
     const resetButton = document.getElementById('reset-button');
-    let currentPlayer = 'X'; 
+    const gameMessage = document.getElementById('game-message');
+    let currentPlayer = 'X';
+    let gameActive = true;
 
     const winningCombinations = [
-        [0, 1, 2], 
-        [3, 4, 5], 
-        [6, 7, 8], 
-        [0, 3, 6], 
-        [1, 4, 7], 
-        [2, 5, 8], 
-        [0, 4, 8], 
-        [2, 4, 6], 
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+        [0, 4, 8], [2, 4, 6]
     ];
 
     function checkWin(cells) {
         for (let combination of winningCombinations) {
             const [a, b, c] = combination;
-
             if (
                 cells[a].textContent &&
                 cells[a].textContent === cells[b].textContent &&
                 cells[a].textContent === cells[c].textContent
             ) {
-                console.log(`Winner: ${cells[a].textContent}`);
-                return combination; 
+                return combination;
             }
         }
-        return null; 
+        return null;
     }
 
     cells.forEach(cell => {
         cell.addEventListener('click', () => {
-            if (!cell.textContent) { 
-                cell.textContent = currentPlayer; 
-                console.log(`${currentPlayer} placed on ${cell.id}`);
-
+            if (gameActive && !cell.textContent) {
+                cell.textContent = currentPlayer;
                 const winningCombo = checkWin(cells);
+
                 if (winningCombo) {
                     winningCombo.forEach(index => {
                         cells[index].style.backgroundColor = 'green';
                     });
-                    console.log(`${currentPlayer} wins!`);
-                    return; 
+                    gameMessage.textContent = `Player ${currentPlayer} wins! 🎉`;
+                    gameActive = false;
+                    return;
                 }
 
                 currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                gameMessage.textContent = `Player ${currentPlayer}'s turn`;
             }
         });
     });
 
     resetButton.addEventListener('click', () => {
         cells.forEach(cell => {
-            cell.textContent = ''; 
-            cell.style.backgroundColor = ''; 
+            cell.textContent = '';
+            cell.style.backgroundColor = '';
         });
-        currentPlayer = 'X'; 
-        console.log('Game reset!');
+        currentPlayer = 'X';
+        gameActive = true;
+        gameMessage.textContent = `Player X's turn`;
     });
 });
