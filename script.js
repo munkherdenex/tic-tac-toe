@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let gameActive = true;
 
     const winningCombinations = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], 
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+        [0, 1, 2], [3, 4, 5], [6, 7, 8],
+        [0, 3, 6], [1, 4, 7], [2, 5, 8],
         [0, 4, 8], [2, 4, 6]
     ];
 
@@ -25,10 +25,15 @@ document.addEventListener('DOMContentLoaded', () => {
         return null;
     }
 
+    function isDraw(cells) {
+        return [...cells].every(cell => cell.textContent); 
+    }
+
     cells.forEach(cell => {
         cell.addEventListener('click', () => {
             if (gameActive && !cell.textContent) {
                 cell.textContent = currentPlayer;
+
                 const winningCombo = checkWin(cells);
 
                 if (winningCombo) {
@@ -36,6 +41,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         cells[index].style.backgroundColor = 'green';
                     });
                     gameMessage.textContent = `Player ${currentPlayer} wins! 🎉`;
+                    gameActive = false;
+                    return;
+                }
+
+                if (isDraw(cells)) {
+                    gameMessage.textContent = `It's a draw! 🤝`;
                     gameActive = false;
                     return;
                 }
