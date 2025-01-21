@@ -39,17 +39,21 @@ td:empty:hover {
 
 
 #reset-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #f44336;
+    background-color: #0078d7;
     color: white;
     border: none;
+    padding: 10px 20px;
     border-radius: 5px;
+    font-size: 16px;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
 #reset-button:hover {
-    background-color: #d32f2f;
+    background-color: #005a9e;
+}
+
+#reset-button:active {
+    background-color: #003a6f;
+    transform: scale(0.95);
 }
