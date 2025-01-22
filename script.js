@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return [...cells].every(cell => cell.textContent); 
     }
 
+    function updateGameMessage() {
+        gameMessage.innerHTML = `Player <span>${currentPlayer}</span>'s turn`;
+    }
+
     cells.forEach(cell => {
         cell.addEventListener('click', () => {
             if (gameActive && !cell.textContent) {
@@ -52,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-                gameMessage.textContent = `Player ${currentPlayer}'s turn`;
+                updateGameMessage();
             }
         });
     });
@@ -64,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         currentPlayer = 'X';
         gameActive = true;
-        gameMessage.textContent = `Player X's turn`;
+        updateGameMessage();
     });
+
+    updateGameMessage();
 });

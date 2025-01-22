@@ -25,15 +25,35 @@ td {
     vertical-align: middle;
     border: 1px solid #333;
     cursor: pointer;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-td:hover {
-    background-color: #f0f0f0;
+    font-size: 24px;
+    font-weight: bold;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
 td:empty:hover {
-    color: #aaa;
+    background-color: #e6f7ff;
+}
+
+td:not(:empty) {
+    animation: pop 0.2s;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.9);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#game-message span {
+    font-weight: bold;
+    color: #0078d7; 
+    transition: color 0.3s;
 }
 
 
