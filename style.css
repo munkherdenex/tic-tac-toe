@@ -56,7 +56,9 @@ td:not(:empty) {
     transition: color 0.3s;
 }
 
-
+#rst {
+    margin-top: 20px;
+}
 
 #reset-button {
     background-color: #0078d7;
